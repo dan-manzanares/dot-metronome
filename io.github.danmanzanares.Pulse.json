@@ -36,7 +36,12 @@
                 "install -Dm644 packaging/io.github.danmanzanares.Pulse.svg /app/share/icons/hicolor/scalable/apps/io.github.danmanzanares.Pulse.svg"
             ],
             "sources": [
-                { "type": "dir", "path": "." }
+                {
+                    "type": "git",
+                    "url": "https://github.com/dan-manzanares/pulse.git",
+                    "tag": "v1.0.0",
+                    "commit": "4b7a66ed9a657db9b25d147ab426bb4533694afc"
+                }
             ]
         }
     ]
