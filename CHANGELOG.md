@@ -9,16 +9,23 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 - `PACKAGING.md`: procedimiento completo de build, prueba, validación y
   publicación en Flathub, con los comandos exactos.
 
+### Eliminado
+
+- `main.py` (versión original en Tkinter) y los sonidos que solo usaba ella,
+  `resources/beat_agudo.wav` y `resources/beat_grave.wav`. Dependían de
+  `tkinter` y `pygame`, ausentes en el runtime de GNOME, así que nunca podían
+  ejecutarse dentro del Flatpak. Siguen disponibles en el historial de git
+  (`git show v1.0.0:main.py`).
+
 ### Cambiado
 
 - Manifest simplificado: se quitó el bloque `cleanup` (no aplica a un proyecto
   de puro Python: no genera `/include`, `.la` ni `.a`), el `mkdir -p`
   redundante (`install -D` ya crea los directorios) y se unificaron las
   órdenes de instalación que apuntaban al mismo destino.
-- El Flatpak ya no incluye `main.py` (versión Tkinter original: depende de
-  `tkinter` y `pygame`, ausentes en el runtime de GNOME, así que nunca podría
-  ejecutarse) ni `resources/screenshot.png` (solo sirve para la ficha de la
-  tienda y el README). El payload instalado bajó de 536 KB a 212 KB.
+- El Flatpak ya no incluye `resources/screenshot.png` (solo sirve para la
+  ficha de la tienda y el README). El payload instalado bajó de 536 KB a
+  212 KB.
 - Permisos de instalación corregidos: los módulos Python y los datos van como
   644; solo el launcher en `/app/bin/pulse` necesita 755.
 - La licencia ya no se instala dos veces: `flatpak-builder` la publica sola en

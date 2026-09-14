@@ -1,7 +1,5 @@
-# Metrónomo en GTK
-# PULSE
-# ver main.py para más detalles (versión original en Tkinter)
-# Migración a sistema GNOME
+# PULSE — metrónomo en GTK4/Adwaita
+# La versión original en Tkinter vive en el historial de git (git show v1.0.0:main.py)
 
 import gi
 

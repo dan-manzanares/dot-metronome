@@ -133,6 +133,8 @@ Reglas del envío:
 | `/app/share/icons/hicolor/scalable/apps/` | Ícono |
 | `/app/share/licenses/` | `LICENSE.md` (lo instala flatpak-builder solo) |
 
-Quedan deliberadamente fuera: `main.py` (versión Tkinter original; depende de
-`tkinter` y `pygame`, ausentes en el runtime) y `resources/screenshot.png`
-(solo sirve para la ficha de la tienda y el README — pesa más que toda la app).
+Queda deliberadamente fuera `resources/screenshot.png`: solo sirve para la
+ficha de la tienda y el README, y pesa más que toda la app. Por eso los
+recursos se instalan con `find ... ! -name '*.png'` en vez de un glob por
+extensión: así se incluye cualquier audio que se agregue después, sin romper
+el build si alguna extensión deja de existir.
