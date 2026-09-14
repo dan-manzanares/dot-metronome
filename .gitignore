@@ -6,3 +6,8 @@ __pycache__/
 build-dir/
 repo/
 *.flatpak
+
+# Artefactos de Capacitor/Android (se regeneran con npx cap add/sync)
+webapp/node_modules/
+webapp/android/
+webapp/ios/

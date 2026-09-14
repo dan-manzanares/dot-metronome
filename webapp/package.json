@@ -1,0 +1,17 @@
+{
+  "name": "pulse-webapp",
+  "version": "1.0.0",
+  "description": "Pulse - metrónomo simple, sin anuncios ni rastreo.",
+  "private": true,
+  "scripts": {
+    "cap:sync": "cap sync",
+    "cap:android": "cap open android"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/android": "^7.0.0"
+  }
+}

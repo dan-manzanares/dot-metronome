@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pulse</title>
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<header class="barra-titulo">
+  <!-- Solo para el sitio web: dentro de la app empaquetada con Capacitor,
+       el script de abajo lo oculta apenas carga la página (ver nota ahí).
+       PLACEHOLDER: todavía no hay ningún release publicado (ni .apk en
+       GitHub ni ficha de Play Store) — reemplazar este href apenas exista. -->
+  <a id="enlace-descarga-android" class="enlace-android"
+     href="https://github.com/dan-manzanares/pulse/releases"
+     target="_blank" rel="noopener">
+    <svg class="icono-android" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 10.5v6.2c0 .5.4.9.9.9h.6v2.7a1.1 1.1 0 0 0 2.2 0v-2.7h2.6v2.7a1.1 1.1 0 0 0 2.2 0v-2.7h.6c.5 0 .9-.4.9-.9v-6.2H7Z"/>
+      <path d="M7 9.6h10a5 5 0 0 0-2.09-3.5l.86-1.49a.45.45 0 1 0-.78-.45l-.9 1.55a5.6 5.6 0 0 0-4.18 0l-.9-1.55a.45.45 0 1 0-.78.45l.86 1.49A5 5 0 0 0 7 9.6Zm3.1-2.1a.55.55 0 1 1 0-1.1.55.55 0 0 1 0 1.1Zm3.8 0a.55.55 0 1 1 0-1.1.55.55 0 0 1 0 1.1Z"/>
+      <rect x="3.6" y="10.5" width="1.8" height="5.6" rx="0.9"/>
+      <rect x="18.6" y="10.5" width="1.8" height="5.6" rx="0.9"/>
+    </svg>
+    <span>Descargar app Android</span>
+  </a>
+  <span class="titulo-app">Pulse</span>
+  <button id="boton-acerca-de" class="boton-info" title="Acerca de">ⓘ</button>
+  <script>
+    // Solo debe verse en el sitio web, nunca en el port empaquetado con
+    // Capacitor. Dentro de una app nativa de Capacitor, el runtime inyecta
+    // window.Capacitor antes de que el WebView empiece a parsear la página
+    // (se agrega desde el lado nativo, no desde un <script> de este HTML),
+    // así que ya está disponible en este punto. En un navegador normal esa
+    // variable no existe nunca, así que el enlace queda visible.
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      document.getElementById("enlace-descarga-android").hidden = true;
+    }
+  </script>
+</header>
+
+<main class="contenido">
+
+  <!-- Fila de BPM: -5 | número editable | +5 -->
+  <div class="fila-bpm">
+    <button id="boton-menos5" class="bpm-paso">−5</button>
+    <input id="campo-bpm" class="campo-bpm" type="text" inputmode="numeric" value="70 BPM">
+    <button id="boton-mas5" class="bpm-paso">+5</button>
+  </div>
+
+  <!-- Slider. Las marcas van como elementos propios: el <datalist> no dibuja
+       etiquetas en ningún navegador, solo rayitas y no en todos. -->
+  <input id="slider-bpm" class="slider-bpm" type="range" min="40" max="220" step="1" value="70"
+         aria-label="Tempo en BPM">
+  <div class="marcas-bpm" aria-hidden="true">
+    <span class="marca">40 BPM</span>
+    <span class="marca">70 BPM</span>
+    <span class="marca">100 BPM</span>
+    <span class="marca">130 BPM</span>
+    <span class="marca">160 BPM</span>
+    <span class="marca">190 BPM</span>
+    <span class="marca">220 BPM</span>
+  </div>
+
+  <!-- Círculos animados -->
+  <canvas id="area-dibujo" width="400" height="400"></canvas>
+
+  <!-- Botón ON / OFF -->
+  <button id="boton-io" class="io">ON</button>
+
+  <!-- Selector de subdivisión -->
+  <div id="grupo-subdiv" class="grupo-subdiv" role="group">
+    <button class="toggle-sub activo" data-valor="1">OFF</button>
+    <button class="toggle-sub" data-valor="2">2</button>
+    <button class="toggle-sub" data-valor="3">3</button>
+    <button class="toggle-sub" data-valor="4">4</button>
+    <button class="toggle-sub" data-valor="5">5</button>
+    <button class="toggle-sub" data-valor="6">6</button>
+    <button class="toggle-sub" data-valor="7">7</button>
+  </div>
+
+  <footer class="pie">
+    <a class="bmc" href="https://buymeacoffee.com/daniel_manzanares" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </footer>
+
+</main>
+
+<!-- Diálogo "Acerca de" -->
+<dialog id="dialogo-acerca-de" class="dialogo-acerca-de">
+  <h2>Pulse</h2>
+  <p class="version">Versión 1.0</p>
+  <p>
+    This is a metronome app that aims to be simple, useful and free forever.
+    It's main purpose is to provide an straightforward way to practice, no ads, no tracking,
+    no requests to upgrade to premium.
+  </p>
+  <p>Developed by Daniel Manzanares, 2026.</p>
+  <p class="licencia">
+    Licencia: CC BY-NC 4.0<br>
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">
+      creativecommons.org/licenses/by-nc/4.0
+    </a>
+  </p>
+  <form method="dialog">
+    <button class="cerrar-dialogo">Cerrar</button>
+  </form>
+</dialog>
+
+<script src="js/motor.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
