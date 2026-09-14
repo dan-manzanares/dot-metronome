@@ -69,6 +69,12 @@
     Motor.setSubdiv(parseInt(boton.dataset.valor, 10));
   });
 
+  // ---- Tap tempo: clic en los círculos ----
+  canvas.addEventListener("click", () => {
+    const nuevoBpm = Motor.tap();
+    if (nuevoBpm !== null) aplicarBpm(nuevoBpm);
+  });
+
   // ---- Diálogo "Acerca de" ----
   botonAcercaDe.addEventListener("click", () => dialogoAcercaDe.showModal());
   dialogoAcercaDe.querySelector(".cerrar-dialogo").addEventListener("click", (evento) => {

@@ -3,10 +3,16 @@
 # variables del PROPIO módulo. Como bpm, subdiv, etc. viven en estado.py,
 # simplemente se leen/escriben como estado.bpm, estado.subdiv, ...
 
+import time
+
 from gi.repository import GLib
 
 import estado
 import sonido
+
+# Tap tempo: un clic más lento que esto se toma como el inicio de una cuenta
+# nueva, en vez de promediarlo con los clics anteriores.
+TAP_TIMEOUT_S = 2.0
 
 
 def animar_beat():
@@ -108,3 +114,21 @@ def onoff(clicked):
 
 def cambiar_sub(grupo, param):
     estado.subdiv = int(grupo.get_active_name())
+
+
+def tap_tempo(gesto=None, n_press=None, x=None, y=None):
+    # Clic en los círculos: se guardan los últimos 3 clics y el BPM se calcula
+    # promediando los 2 intervalos entre ellos. Los args del gesto no se usan
+    # (no importa dónde dentro del área de dibujo se haga clic).
+    ahora = time.monotonic()
+    if estado.tap_tiempos and ahora - estado.tap_tiempos[-1] > TAP_TIMEOUT_S:
+        estado.tap_tiempos.clear()
+    estado.tap_tiempos.append(ahora)
+    del estado.tap_tiempos[:-3]  # solo importan los últimos 3 clics
+
+    if len(estado.tap_tiempos) < 3:
+        return  # todavía no hay suficientes clics para calcular
+
+    intervalos = [b - a for a, b in zip(estado.tap_tiempos, estado.tap_tiempos[1:])]
+    promedio = sum(intervalos) / len(intervalos)
+    aplicar_bpm(round(60 / promedio))

@@ -34,6 +34,10 @@ const Motor = (() => {
   let scheduled = [];     // eventos ya programados en audio, pendientes de reflejarse en la UI
   let onVisualEvent = null; // callback(kind, esPrimero) -> 'beat' | 'sub'
 
+  // ---- Tap tempo ----
+  const TAP_TIMEOUT_MS = 2000; // un clic más lento que esto se toma como el inicio de una cuenta nueva
+  let tapTiempos = [];
+
   function limitarBpm(valor) {
     return Math.max(BPM_MIN, Math.min(BPM_MAX, Math.round(valor)));
   }
@@ -134,11 +138,33 @@ const Motor = (() => {
     subdiv = valor;
   }
 
+  function tap() {
+    // Cada clic se agrega a la cuenta; si tarda demasiado en llegar el
+    // siguiente, se asume que el usuario empezó a marcar un tempo distinto
+    // y se descartan los clics anteriores en vez de promediarlos con estos.
+    const ahora = performance.now();
+    if (tapTiempos.length && ahora - tapTiempos[tapTiempos.length - 1] > TAP_TIMEOUT_MS) {
+      tapTiempos = [];
+    }
+    tapTiempos.push(ahora);
+    if (tapTiempos.length > 3) tapTiempos.shift(); // solo importan los últimos 3 clics
+
+    if (tapTiempos.length < 3) return null; // todavía no hay suficientes clics para calcular
+
+    let sumaIntervalos = 0;
+    for (let i = 1; i < tapTiempos.length; i++) {
+      sumaIntervalos += tapTiempos[i] - tapTiempos[i - 1];
+    }
+    const promedioMs = sumaIntervalos / (tapTiempos.length - 1);
+    return Math.round(60000 / promedioMs);
+  }
+
   return {
     iniciar,
     detener,
     setBpm,
     setSubdiv,
+    tap,
     get bpm() { return bpm; },
     get playing() { return playing; },
     set onVisualEvent(fn) { onVisualEvent = fn; },

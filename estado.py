@@ -24,3 +24,6 @@ pulso_beat_id = None
 animar_beat_id = None
 pulso_sub_id = []  # lista: puede haber varias subdivisiones pendientes a la vez
 animar_sub_id = None
+
+# Tap tempo: instantes (time.monotonic()) de los últimos clics en los círculos
+tap_tiempos = []

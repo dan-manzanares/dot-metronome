@@ -207,6 +207,13 @@ def al_activar(app):
     # siempre pegados entre sí y el footer siempre pegado al fondo, en vez de
     # flotar en el medio con un hueco vacío debajo.
     estado.area_dibujo.set_vexpand(True)
+
+    # Tap tempo: clic en cualquier parte de los círculos calcula el BPM a
+    # partir de los últimos 3 clics.
+    gesto_tap = Gtk.GestureClick.new()
+    gesto_tap.connect("pressed", motor.tap_tempo)
+    estado.area_dibujo.add_controller(gesto_tap)
+
     caja.append(estado.area_dibujo)
 
     # Botón ON / OFF

@@ -292,6 +292,7 @@ body {
   min-height: 0;
   width: 100%;
   display: block;
+  cursor: pointer; /* clicable: tap tempo */
 }
 
 /* ---- Botón ON / OFF ---- */
