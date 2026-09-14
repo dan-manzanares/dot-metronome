@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+
+# Artefactos de flatpak-builder (se regeneran con flatpak-builder)
+.flatpak-builder/
+build-dir/
+repo/
+*.flatpak

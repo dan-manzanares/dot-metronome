@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Pulse
+Comment=Metrónomo simple con subdivisiones, sin anuncios ni rastreo
+Exec=pulse
+Icon=io.github.danmanzanares.Pulse
+Terminal=false
+Categories=AudioVideo;Audio;Music;
+StartupNotify=true

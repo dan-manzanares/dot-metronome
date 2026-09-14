@@ -13,10 +13,10 @@ import estado
 import motor
 
 # Licencia: el README no la menciona, así que este texto queda fijo acá.
-URL_LICENCIA = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+URL_LICENCIA = "https://creativecommons.org/licenses/by-nc/4.0/"
 TEXTO_LICENCIA = (
     "Este trabajo está licenciado bajo Creative Commons "
-    "Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0).\n"
+    "Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0).\n"
     f"{URL_LICENCIA}"
 )
 
@@ -114,9 +114,9 @@ def mostrar_acerca_de(ventana):
     # La licencia va concatenada en "comments" (no solo en license_type/
     # license) para que se lea directo en el diálogo principal, sin tener
     # que entrar a la subpágina "Legal" a buscarla.
-    comentarios = f"{COMENTARIOS_README}\n\nLicencia: CC BY-NC-ND 4.0\n{URL_LICENCIA}"
+    comentarios = f"{COMENTARIOS_README}\n\nLicencia: CC BY-NC 4.0\n{URL_LICENCIA}"
     dialogo = Adw.AboutDialog(
-        application_name="Metrónomo",
+        application_name="Pulse",
         developer_name=DESARROLLADOR,
         version="1.0",
         comments=comentarios,
