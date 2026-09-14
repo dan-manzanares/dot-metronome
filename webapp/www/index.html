@@ -3,8 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pulse</title>
+
+<title>Dot - Minimal Metronome, no ads, no tracking, free forever</title>
+<meta name="description" content="Dot is a free online metronome with tap tempo and adjustable beat subdivisions (2 to 7). No ads, no tracking, no sign-up — works right in your browser.">
+<link rel="canonical" href="https://pulse.alteus.app/">
+<meta name="theme-color" content="#24212c">
+
+<!-- Open Graph / Twitter Card: sin og:image todavía a propósito — el único
+     screenshot que existe (resources/screenshot.png) muestra la barra de
+     título vieja ("Pulse") y es de la versión de escritorio, no de esta UI
+     web. Agregar uno nuevo con la marca "Dot" antes de sumar estas etiquetas. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dot">
+<meta property="og:title" content="Dot - Minimal Metronome, no ads, no tracking, free forever">
+<meta property="og:description" content="Free online metronome with tap tempo and adjustable beat subdivisions. No ads, no tracking, free forever.">
+<meta property="og:url" content="https://pulse.alteus.app/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dot - Minimal Metronome, no ads, no tracking, free forever">
+<meta name="twitter:description" content="Free online metronome with tap tempo and adjustable beat subdivisions. No ads, no tracking, free forever.">
+
 <link rel="stylesheet" href="css/estilo.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Dot",
+  "url": "https://pulse.alteus.app/",
+  "description": "Free online metronome with tap tempo and adjustable beat subdivisions (2 to 7). No ads, no tracking, no sign-up.",
+  "applicationCategory": "MusicApplication",
+  "operatingSystem": "Any (web browser), Android",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Daniel Manzanares"
+  },
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/"
+}
+</script>
 </head>
 <body>
 
@@ -14,8 +54,8 @@
        PLACEHOLDER: todavía no hay ningún release publicado (ni .apk en
        GitHub ni ficha de Play Store) — reemplazar este href apenas exista. -->
   <a id="enlace-descarga-android" class="enlace-android"
-     href="https://github.com/dan-manzanares/pulse/releases"
-     target="https://github.com/dan-manzanares/pulse/releases/download/v1.0.0/app-debug.apk" rel="noopener">
+     href="https://pulse.alteus.app/app.apk"
+     target="_blank" rel="noopener">
     <svg class="icono-android" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M7 10.5v6.2c0 .5.4.9.9.9h.6v2.7a1.1 1.1 0 0 0 2.2 0v-2.7h2.6v2.7a1.1 1.1 0 0 0 2.2 0v-2.7h.6c.5 0 .9-.4.9-.9v-6.2H7Z"/>
       <path d="M7 9.6h10a5 5 0 0 0-2.09-3.5l.86-1.49a.45.45 0 1 0-.78-.45l-.9 1.55a5.6 5.6 0 0 0-4.18 0l-.9-1.55a.45.45 0 1 0-.78.45l.86 1.49A5 5 0 0 0 7 9.6Zm3.1-2.1a.55.55 0 1 1 0-1.1.55.55 0 0 1 0 1.1Zm3.8 0a.55.55 0 1 1 0-1.1.55.55 0 0 1 0 1.1Z"/>
@@ -24,7 +64,7 @@
     </svg>
     <span>Descargar app Android</span>
   </a>
-  <span class="titulo-app">Pulse</span>
+  <h1 class="titulo-app">Dot</h1>
   <button id="boton-acerca-de" class="boton-info" title="Acerca de">ⓘ</button>
   <script>
     // Solo debe verse en el sitio web, nunca en el port empaquetado con
@@ -87,11 +127,12 @@
 
 <!-- Diálogo "Acerca de" -->
 <dialog id="dialogo-acerca-de" class="dialogo-acerca-de">
-  <h2>Pulse</h2>
+  <h2>Dot</h2>
   <p class="version">Versión 1.0</p>
   <p>
-    This is a metronome app that aims to be simple, useful and free forever.
-    It's main purpose is to provide an straightforward way to practice, no ads, no tracking,
+    Dot is an online metronome that aims to be simple, useful and free forever.
+    Set your tempo with the slider, the -5/+5 buttons or tap tempo, and split
+    each beat into subdivisions from 2 to 7. No ads, no tracking, no account,
     no requests to upgrade to premium.
   </p>
   <p>Developed by Daniel Manzanares, 2026.</p>

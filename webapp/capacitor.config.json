@@ -1,6 +1,6 @@
 {
-  "appId": "io.github.danmanzanares.Pulse",
-  "appName": "Pulse",
+  "appId": "io.github.danmanzanares.Dot",
+  "appName": "Dot",
   "webDir": "www",
   "bundledWebRuntime": false
 }

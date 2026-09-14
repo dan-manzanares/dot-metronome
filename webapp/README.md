@@ -1,4 +1,4 @@
-# Pulse — versión web
+# Dot — versión web
 
 Puerto a HTML/CSS/JS de la app de escritorio (GTK4/Adwaita) que vive en la
 raíz de este repo. Standalone: no requiere backend ni conexión — toda la

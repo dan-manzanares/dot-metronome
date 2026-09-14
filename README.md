@@ -1,4 +1,4 @@
-# Pulse
+# Dot
 
 Made with <3 by Daniel Manzanares, 2026.
 

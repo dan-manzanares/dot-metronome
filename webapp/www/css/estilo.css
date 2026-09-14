@@ -73,6 +73,8 @@ body {
 }
 
 .titulo-app {
+  margin: 0; /* .titulo-app pasó de <span> a <h1> (semántica/SEO); sin esto
+                el margin por defecto del h1 desalinea .barra-titulo */
   font-size: 0.95rem;
   font-weight: 700;
 }

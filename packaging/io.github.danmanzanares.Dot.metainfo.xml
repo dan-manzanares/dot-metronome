@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.danmanzanares.Pulse</id>
+  <id>io.github.danmanzanares.Dot</id>
   <metadata_license>CC0-1.0</metadata_license>
   <!-- La app no declara una licencia de código aparte; el diálogo "Acerca de"
        (ver interfaz.py) muestra CC BY-NC 4.0, igual que LICENSE.md, así que
        se refleja igual acá. Si más adelante se define otra licencia,
        actualizar los tres lugares. -->
   <project_license>CC-BY-NC-4.0</project_license>
-  <name>Pulse</name>
-  <summary>Metrónomo simple, con subdivisiones, sin anuncios ni rastreo</summary>
+  <name>Dot</name>
+  <summary>Metrónomo minimalista, con subdivisiones, sin anuncios ni rastreo</summary>
   <developer id="io.github.danmanzanares">
     <name>Daniel Alejandro Manzanares Chichil</name>
   </developer>
   <!-- Nota: el linter de Flathub (flatpak-builder-lint) NO lee esta etiqueta
        para verificar propiedad del App ID — arma su propia URL a partir del
-       texto del App ID (github.com/danmanzanares/pulse, sin guion) y esa
-       comprobación va a fallar en 404 porque un guion no es válido en un
-       segmento no-final de un App ID (ver nota en main_gtk.py), aunque el
-       usuario real de GitHub sí lleva guion. Por eso, aquí abajo, el
-       homepage apunta a la URL real (con guion) para que los usuarios lleguen
+       texto del App ID (github.com/danmanzanares/dot, sin guion y sin el
+       sufijo "-metronome") y esa comprobación va a fallar en 404 por dos
+       motivos: un guion no es válido en un segmento no-final de un App ID
+       (ver nota en main_gtk.py), y el repo real se llama "dot-metronome"
+       (no solo "dot", porque "dot" a secas ya podía chocar con otro proyecto
+       en GitHub). El usuario real de GitHub sí lleva guion. Por eso, aquí
+       abajo, el homepage apunta a la URL real para que los usuarios lleguen
        al repo correcto; hay que pedirle al revisor de Flathub que verifique
        la propiedad a mano. -->
-  <url type="homepage">https://github.com/dan-manzanares/pulse</url>
+  <url type="homepage">https://github.com/dan-manzanares/dot-metronome</url>
   <url type="donation">https://buymeacoffee.com/daniel_manzanares</url>
   <description>
     <p>
@@ -31,11 +33,11 @@
     </p>
     <p>Sin anuncios, sin rastreo, sin pedidos de actualizar a premium.</p>
   </description>
-  <launchable type="desktop-id">io.github.danmanzanares.Pulse.desktop</launchable>
+  <launchable type="desktop-id">io.github.danmanzanares.Dot.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <caption>Pantalla principal: BPM, círculo de beat/subdivisión y selector de subdivisión</caption>
-      <image>https://raw.githubusercontent.com/dan-manzanares/pulse/main/resources/screenshot.png</image>
+      <image>https://raw.githubusercontent.com/dan-manzanares/dot-metronome/main/resources/screenshot.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1" />

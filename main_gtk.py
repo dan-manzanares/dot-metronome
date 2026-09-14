@@ -1,4 +1,4 @@
-# PULSE — metrónomo en GTK4/Adwaita
+# DOT — metrónomo en GTK4/Adwaita
 # La versión original en Tkinter vive en el historial de git (git show v1.0.0:main.py)
 
 import gi
@@ -32,11 +32,12 @@ Gtk.StyleContext.add_provider_for_display(
 # el esquema io.github.<usuario> para verificar la app en Flathub vía GitHub.
 # Nota: el usuario real de GitHub es "dan-manzanares" (con guion), pero el
 # guion no es válido en un segmento no-final de un App ID de Flatpak — de ahí
-# que este segmento vaya sin guion. Al enviar a Flathub, la comprobación
-# automática de propiedad (que arma la URL a partir del App ID) va a buscar
-# github.com/danmanzanares/pulse y no va a encontrarlo; hay que aclarar en la
-# solicitud que el usuario real es dan-manzanares para que un revisor lo
-# verifique a mano.
-app = Adw.Application(application_id="io.github.danmanzanares.Pulse")
+# que este segmento vaya sin guion. Además el repo se llama "dot-metronome",
+# no "dot" a secas. Al enviar a Flathub, la comprobación automática de
+# propiedad (que arma la URL a partir del App ID) va a buscar
+# github.com/danmanzanares/dot y no va a encontrarlo; hay que aclarar en la
+# solicitud que el repo real es dan-manzanares/dot-metronome para que un
+# revisor lo verifique a mano.
+app = Adw.Application(application_id="io.github.danmanzanares.Dot")
 app.connect("activate", interfaz.al_activar)
 app.run(None)

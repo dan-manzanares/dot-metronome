@@ -1,6 +1,6 @@
 # Empaquetado y publicación (Flatpak / Flathub)
 
-Procedimiento completo para construir, probar y publicar Pulse.
+Procedimiento completo para construir, probar y publicar Dot.
 Todos los comandos se corren desde la raíz del proyecto salvo que se indique.
 
 ## Requisitos previos (una sola vez)
@@ -20,16 +20,16 @@ No hace falta instalar nada más: Gtk4, Adwaita, pycairo, Rsvg y GStreamer
 
 ```bash
 # Construir y exportar a un repo OSTree local
-flatpak-builder --force-clean --repo=repo build-dir io.github.danmanzanares.Pulse.json
+flatpak-builder --force-clean --repo=repo build-dir io.github.danmanzanares.Dot.json
 
 # Registrar el repo local (una sola vez)
-flatpak remote-add --user --if-not-exists --no-gpg-verify pulse-local repo
+flatpak remote-add --user --if-not-exists --no-gpg-verify dot-local repo
 
 # Instalar desde el repo local
-flatpak install --user -y pulse-local io.github.danmanzanares.Pulse
+flatpak install --user -y dot-local io.github.danmanzanares.Dot
 
 # Correr
-flatpak run --user io.github.danmanzanares.Pulse
+flatpak run --user io.github.danmanzanares.Dot
 ```
 
 Todo el ciclo va con `--user` a propósito: las operaciones en ámbito *system*
@@ -41,7 +41,7 @@ Para reconstruir tras un cambio, basta con repetir el primer comando y
 reinstalar. Si algo queda en estado raro:
 
 ```bash
-flatpak uninstall --user -y io.github.danmanzanares.Pulse
+flatpak uninstall --user -y io.github.danmanzanares.Dot
 rm -rf .flatpak-builder build-dir repo
 ```
 
@@ -60,13 +60,13 @@ incluye en el envío).
 
 ```bash
 # Metadatos AppStream (sin depender de la red)
-appstreamcli validate --no-net packaging/io.github.danmanzanares.Pulse.metainfo.xml
+appstreamcli validate --no-net packaging/io.github.danmanzanares.Dot.metainfo.xml
 
 # Entrada de menú
-desktop-file-validate packaging/io.github.danmanzanares.Pulse.desktop
+desktop-file-validate packaging/io.github.danmanzanares.Dot.desktop
 
 # El mismo linter que corre el CI de Flathub
-flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest io.github.danmanzanares.Pulse.json
+flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest io.github.danmanzanares.Dot.json
 flatpak run --command=flatpak-builder-lint org.flatpak.Builder builddir build-dir
 ```
 
@@ -83,7 +83,7 @@ Errores esperados que **no** son bloqueantes:
 
 ```bash
 # 1. Taguear el commit que se quiere publicar
-git tag -a v1.0.1 -m "Pulse 1.0.1"
+git tag -a v1.0.1 -m "Dot 1.0.1"
 git push origin v1.0.1
 
 # 2. Actualizar tag y commit en el manifest
@@ -103,12 +103,12 @@ gh repo fork flathub/flathub --clone=false
 git clone --branch=new-pr https://github.com/dan-manzanares/flathub.git /tmp/flathub-submission
 cd /tmp/flathub-submission
 git checkout -b flathub new-pr
-cp /ruta/al/proyecto/io.github.danmanzanares.Pulse.json .
-git add io.github.danmanzanares.Pulse.json
-git commit -m "Add io.github.danmanzanares.Pulse"
+cp /ruta/al/proyecto/io.github.danmanzanares.Dot.json .
+git add io.github.danmanzanares.Dot.json
+git commit -m "Add io.github.danmanzanares.Dot"
 git push -u origin flathub
 gh pr create --repo flathub/flathub --base new-pr --head dan-manzanares:flathub \
-  --title "Add io.github.danmanzanares.Pulse"
+  --title "Add io.github.danmanzanares.Dot"
 ```
 
 Reglas del envío:
@@ -118,16 +118,16 @@ Reglas del envío:
 - El PR va contra la rama `new-pr`, no contra `master`.
 - No hay que cerrar y reabrir el PR durante la revisión.
 - Un revisor puede lanzar un build de prueba comentando `bot, build`.
-- Al aprobarse, Flathub crea `flathub/io.github.danmanzanares.Pulse` e invita
+- Al aprobarse, Flathub crea `flathub/io.github.danmanzanares.Dot` e invita
   al autor como colaborador (requiere 2FA; aceptar dentro de una semana).
 
 ## Qué se instala dentro del Flatpak
 
 | Ruta | Contenido |
 |---|---|
-| `/app/bin/pulse` | Launcher (`pulse.sh`) |
-| `/app/share/pulse/` | Módulos Python, `estilo.css`, `README.md` |
-| `/app/share/pulse/resources/` | Sonidos (`.mp3`, `.wav`) |
+| `/app/bin/dot` | Launcher (`dot.sh`) |
+| `/app/share/dot/` | Módulos Python, `estilo.css`, `README.md` |
+| `/app/share/dot/resources/` | Sonidos (`.mp3`, `.wav`) |
 | `/app/share/applications/` | Entrada de menú |
 | `/app/share/metainfo/` | Metadatos AppStream |
 | `/app/share/icons/hicolor/scalable/apps/` | Ícono |

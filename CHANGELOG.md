@@ -8,6 +8,9 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 - `PACKAGING.md`: procedimiento completo de build, prueba, validación y
   publicación en Flathub, con los comandos exactos.
+- Versión web: metadatos SEO en `index.html` (title, meta description, Open
+  Graph, Twitter Card, JSON-LD `WebApplication`), `robots.txt` y
+  `sitemap.xml`.
 
 ### Eliminado
 
@@ -19,6 +22,13 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ### Cambiado
 
+- Renombrado el proyecto de **Pulse** a **Dot** en las tres versiones
+  (escritorio/Flatpak, web y Android): ventana, diálogo "Acerca de", desktop
+  entry, metainfo, ícono, App ID (`io.github.danmanzanares.Dot`), launcher
+  (`dot.sh`), `capacitor.config.json` y `package.json`. Motivo: la revisión
+  de Flathub bajo `io.github.danmanzanares.Pulse` fue descartada por los
+  revisores. El repositorio de GitHub también se renombró a
+  `dan-manzanares/dot-metronome`.
 - Manifest simplificado: se quitó el bloque `cleanup` (no aplica a un proyecto
   de puro Python: no genera `/include`, `.la` ni `.a`), el `mkdir -p`
   redundante (`install -D` ya crea los directorios) y se unificaron las
@@ -27,7 +37,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
   ficha de la tienda y el README). El payload instalado bajó de 536 KB a
   212 KB.
 - Permisos de instalación corregidos: los módulos Python y los datos van como
-  644; solo el launcher en `/app/bin/pulse` necesita 755.
+  644; solo el launcher en `/app/bin/dot` necesita 755.
 - La licencia ya no se instala dos veces: `flatpak-builder` la publica sola en
   `/app/share/licenses/`.
 
@@ -35,9 +45,10 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ### Añadido
 
-- Empaquetado como Flatpak: manifest [io.github.danmanzanares.Pulse.json](io.github.danmanzanares.Pulse.json),
-  launcher `pulse.sh`, desktop entry, metainfo AppStream (con captura de
-  pantalla) e ícono, todo bajo `packaging/`.
+- Empaquetado como Flatpak: manifest [io.github.danmanzanares.Dot.json](io.github.danmanzanares.Dot.json)
+  (entonces `io.github.danmanzanares.Pulse.json`, ver "Renombrado" más arriba),
+  launcher `dot.sh` (entonces `pulse.sh`), desktop entry, metainfo AppStream
+  (con captura de pantalla) e ícono, todo bajo `packaging/`.
 - `rutas.py`: resuelve las rutas a datos (CSS, `resources/`) desde la
   ubicación del código en vez del directorio de trabajo, para que la app
   funcione igual instalada que en desarrollo.

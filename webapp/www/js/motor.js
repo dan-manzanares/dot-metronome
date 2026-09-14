@@ -1,5 +1,5 @@
 // El "motor" del metrónomo: scheduler de audio y lógica de beat/subdivisión.
-// Puerto de motor.py + sonido.py (versión GTK de Pulse).
+// Puerto de motor.py + sonido.py (versión GTK de Dot).
 //
 // Por qué no alcanza con setTimeout/setInterval "ingenuo":
 // el mismo problema de deriva que tenía la versión de escritorio

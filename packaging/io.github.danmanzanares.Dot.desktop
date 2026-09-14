@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Dot
+Comment=Metrónomo minimalista, sin anuncios ni rastreo, gratis para siempre
+Exec=dot
+Icon=io.github.danmanzanares.Dot
+Terminal=false
+Categories=AudioVideo;Audio;Music;
+StartupNotify=true

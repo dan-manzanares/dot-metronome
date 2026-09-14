@@ -116,7 +116,7 @@ def mostrar_acerca_de(ventana):
     # que entrar a la subpágina "Legal" a buscarla.
     comentarios = f"{COMENTARIOS_README}\n\nLicencia: CC BY-NC 4.0\n{URL_LICENCIA}"
     dialogo = Adw.AboutDialog(
-        application_name="Pulse",
+        application_name="Dot",
         developer_name=DESARROLLADOR,
         version="1.0",
         comments=comentarios,
@@ -129,7 +129,7 @@ def mostrar_acerca_de(ventana):
 
 def al_activar(app):
     ventana = Adw.ApplicationWindow(application=app)
-    ventana.set_title("Pulse")
+    ventana.set_title("Dot")
     ventana.set_default_size(400, 800)
 
     # Barra de título estilo GNOME (trae los botones de cerrar/minimizar/maximizar)
