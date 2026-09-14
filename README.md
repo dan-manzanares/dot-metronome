@@ -2,6 +2,8 @@
 
 Made with <3 by Daniel Manzanares, 2026.
 
+![Screenshot](./resources/screenshot.png)
+
 ## What's this?
 
 This is a metronome app that aims to be simple, useful and free forever.
