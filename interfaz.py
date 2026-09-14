@@ -15,8 +15,8 @@ import motor
 # Licencia: el README no la menciona, así que este texto queda fijo acá.
 URL_LICENCIA = "https://creativecommons.org/licenses/by-nc/4.0/"
 TEXTO_LICENCIA = (
-    "Este trabajo está licenciado bajo Creative Commons "
-    "Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0).\n"
+    "This work is licensed under Creative Commons "
+    "Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).\n"
     f"{URL_LICENCIA}"
 )
 
@@ -114,7 +114,7 @@ def mostrar_acerca_de(ventana):
     # La licencia va concatenada en "comments" (no solo en license_type/
     # license) para que se lea directo en el diálogo principal, sin tener
     # que entrar a la subpágina "Legal" a buscarla.
-    comentarios = f"{COMENTARIOS_README}\n\nLicencia: CC BY-NC 4.0\n{URL_LICENCIA}"
+    comentarios = f"{COMENTARIOS_README}\n\nLicense: CC BY-NC 4.0\n{URL_LICENCIA}"
     dialogo = Adw.AboutDialog(
         application_name="Dot",
         developer_name=DESARROLLADOR,
@@ -142,7 +142,7 @@ def al_activar(app):
     # depurando el tema de íconos, usamos el mismo mecanismo de texto que ya
     # funciona en el resto de la interfaz (labels de BPM, créditos, etc.).
     boton_acerca_de = Gtk.Button(label="ⓘ")
-    boton_acerca_de.set_tooltip_text("Acerca de")
+    boton_acerca_de.set_tooltip_text("About")
     boton_acerca_de.add_css_class("flat")
     boton_acerca_de.add_css_class("boton-info")
     boton_acerca_de.connect("clicked", lambda boton: mostrar_acerca_de(ventana))

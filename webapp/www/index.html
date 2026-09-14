@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -11,13 +11,14 @@
 
 <!-- Open Graph / Twitter Card: sin og:image todavía a propósito — el único
      screenshot que existe (resources/screenshot.png) muestra la barra de
-     título vieja ("Pulse") y es de la versión de escritorio, no de esta UI
+     título viejo ("Pulse") y es de la versión de escritorio, no de esta UI
      web. Agregar uno nuevo con la marca "Dot" antes de sumar estas etiquetas. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dot">
 <meta property="og:title" content="Dot - Minimal Metronome, no ads, no tracking, free forever">
 <meta property="og:description" content="Free online metronome with tap tempo and adjustable beat subdivisions. No ads, no tracking, free forever.">
 <meta property="og:url" content="https://pulse.alteus.app/">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dot - Minimal Metronome, no ads, no tracking, free forever">
 <meta name="twitter:description" content="Free online metronome with tap tempo and adjustable beat subdivisions. No ads, no tracking, free forever.">
@@ -62,10 +63,10 @@
       <rect x="3.6" y="10.5" width="1.8" height="5.6" rx="0.9"/>
       <rect x="18.6" y="10.5" width="1.8" height="5.6" rx="0.9"/>
     </svg>
-    <span>Descargar app Android</span>
+    <span>Download Android app</span>
   </a>
   <h1 class="titulo-app">Dot</h1>
-  <button id="boton-acerca-de" class="boton-info" title="Acerca de">ⓘ</button>
+  <button id="boton-acerca-de" class="boton-info" title="About">ⓘ</button>
   <script>
     // Solo debe verse en el sitio web, nunca en el port empaquetado con
     // Capacitor. Dentro de una app nativa de Capacitor, el runtime inyecta
@@ -91,7 +92,7 @@
   <!-- Slider. Las marcas van como elementos propios: el <datalist> no dibuja
        etiquetas en ningún navegador, solo rayitas y no en todos. -->
   <input id="slider-bpm" class="slider-bpm" type="range" min="40" max="220" step="1" value="70"
-         aria-label="Tempo en BPM">
+         aria-label="Tempo in BPM">
   <div class="marcas-bpm" aria-hidden="true">
     <span class="marca">40 BPM</span>
     <span class="marca">70 BPM</span>
@@ -128,7 +129,7 @@
 <!-- Diálogo "Acerca de" -->
 <dialog id="dialogo-acerca-de" class="dialogo-acerca-de">
   <h2>Dot</h2>
-  <p class="version">Versión 1.0</p>
+  <p class="version">Version 1.0</p>
   <p>
     Dot is an online metronome that aims to be simple, useful and free forever.
     Set your tempo with the slider, the -5/+5 buttons or tap tempo, and split
@@ -137,13 +138,13 @@
   </p>
   <p>Developed by Daniel Manzanares, 2026.</p>
   <p class="licencia">
-    Licencia: CC BY-NC 4.0<br>
+    License: CC BY-NC 4.0<br>
     <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">
       creativecommons.org/licenses/by-nc/4.0
     </a>
   </p>
   <form method="dialog">
-    <button class="cerrar-dialogo">Cerrar</button>
+    <button class="cerrar-dialogo">Close</button>
   </form>
 </dialog>
 

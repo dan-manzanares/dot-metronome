@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Dot
-Comment=Metrónomo minimalista, sin anuncios ni rastreo, gratis para siempre
+Comment=Minimal metronome, no ads, no tracking, free forever
 Exec=dot
 Icon=io.github.danmanzanares.Dot
 Terminal=false

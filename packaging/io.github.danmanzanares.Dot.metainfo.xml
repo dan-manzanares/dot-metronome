@@ -8,7 +8,7 @@
        actualizar los tres lugares. -->
   <project_license>CC-BY-NC-4.0</project_license>
   <name>Dot</name>
-  <summary>Metrónomo minimalista, con subdivisiones, sin anuncios ni rastreo</summary>
+  <summary>Minimal metronome with beat subdivisions, no ads, no tracking</summary>
   <developer id="io.github.danmanzanares">
     <name>Daniel Alejandro Manzanares Chichil</name>
   </developer>
@@ -27,16 +27,16 @@
   <url type="donation">https://buymeacoffee.com/daniel_manzanares</url>
   <description>
     <p>
-      Metrónomo de escritorio pensado para practicar: un círculo se ilumina
-      en cada beat, y otro más pequeño en cada subdivisión, con sonidos
-      independientes para el primer beat, los beats y las subdivisiones.
+      A desktop metronome built for practicing: a circle lights up on every
+      beat, and a smaller one on every subdivision, with independent sounds
+      for the first beat, the beats and the subdivisions.
     </p>
-    <p>Sin anuncios, sin rastreo, sin pedidos de actualizar a premium.</p>
+    <p>No ads, no tracking, no requests to upgrade to premium.</p>
   </description>
   <launchable type="desktop-id">io.github.danmanzanares.Dot.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <caption>Pantalla principal: BPM, círculo de beat/subdivisión y selector de subdivisión</caption>
+      <caption>Main screen: BPM, beat/subdivision circle and subdivision selector</caption>
       <image>https://raw.githubusercontent.com/dan-manzanares/dot-metronome/main/resources/screenshot.png</image>
     </screenshot>
   </screenshots>
@@ -44,7 +44,7 @@
   <releases>
     <release version="1.0" date="2026-09-14">
       <description>
-        <p>Primera versión empaquetada como Flatpak.</p>
+        <p>First version packaged as a Flatpak.</p>
       </description>
     </release>
   </releases>
