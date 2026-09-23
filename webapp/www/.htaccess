@@ -1,0 +1,5 @@
+# Tipos MIME de la PWA que Apache no trae por defecto. Si el hosting no es
+# Apache, configurar el equivalente: manifest.webmanifest debe servirse como
+# application/manifest+json.
+AddType application/manifest+json .webmanifest
+AddType text/javascript .js

@@ -277,6 +277,37 @@
     circuloConRuido(cx, cy, radio2, coloresCirculos.sub, Math.max(0.1, 1 - progresoSub));
   }
 
+  // ---- PWA: instalación y service worker ----
+  // El navegador avisa con beforeinstallprompt cuando la app se puede
+  // instalar; recién ahí se muestra el botón (equivalente del enlace "Get Dot
+  // on your phone" de interfaz.py).
+  const botonInstalar = document.getElementById("boton-instalar");
+  let pedidoInstalacion = null;
+
+  window.addEventListener("beforeinstallprompt", (evento) => {
+    evento.preventDefault(); // sin la barrita automática: se usa el botón del pie
+    pedidoInstalacion = evento;
+    botonInstalar.hidden = false;
+  });
+
+  botonInstalar.addEventListener("click", async () => {
+    if (!pedidoInstalacion) return;
+    pedidoInstalacion.prompt();
+    await pedidoInstalacion.userChoice;
+    pedidoInstalacion = null; // cada aviso sirve una sola vez
+    botonInstalar.hidden = true;
+  });
+
+  window.addEventListener("appinstalled", () => { botonInstalar.hidden = true; });
+
+  // Se registra después de la carga para no competir con los archivos de la
+  // página. Sin HTTPS (o fuera de localhost) no existe, y la app funciona igual.
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
+
   new ResizeObserver(redimensionarCanvas).observe(canvas);
   redimensionarCanvas();
   aplicarBpm(Motor.bpm);

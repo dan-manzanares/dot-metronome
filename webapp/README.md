@@ -18,6 +18,25 @@ entre módulos de Python y resolver rutas de archivos sin depender del
 directorio actual — en JS, `motor.js` guarda su propio estado y las rutas son
 relativas de por sí.
 
+## PWA (app instalable)
+
+La web se instala como app desde el navegador (Chrome/Edge en Android y
+escritorio: botón "Install app" del pie; Safari en iOS: Compartir → "Agregar
+a inicio"). Piezas:
+
+- `manifest.webmanifest`: nombre, colores e íconos (`icons/` y
+  `favicon.svg`, generados desde `resources/icono.svg` con
+  `./generar-iconos.sh`, que requiere `rsvg-convert` e ImageMagick).
+- `sw.js`: service worker. Sirve cada archivo desde la caché y lo actualiza en
+  segundo plano, así la app abre al instante, funciona sin conexión y toma
+  los cambios publicados en la visita siguiente. Si cambia la lista de
+  archivos, actualizar `ARCHIVOS` y subir `VERSION_CACHE`.
+- `.htaccess`: tipo MIME del manifest para Apache. En otro servidor,
+  configurar `application/manifest+json` para `.webmanifest`.
+
+Requiere HTTPS (o `localhost`): sin eso el navegador no registra el service
+worker ni ofrece instalar, aunque la web funciona igual.
+
 ## Probar en Apache/XAMPP
 
 Esta carpeta ya vive bajo `htdocs/`, así que con Apache corriendo:

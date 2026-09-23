@@ -21,8 +21,14 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
   ritmo: en GTK lo aplica un elemento `volume` de GStreamer y en la web una
   ganancia general de Web Audio. Se recuerda entre sesiones, igual que el
   tema (`~/.config/dot/volumen` / `localStorage`).
+- Versión web instalable como app (PWA): `manifest.webmanifest`, íconos
+  (generados con `webapp/generar-iconos.sh`) y un service worker (`sw.js`)
+  que sirve la app desde la caché, así abre sin esperar la red y funciona sin
+  conexión. El pie muestra "Install app" solo cuando el navegador ofrece
+  instalarla. Reemplaza al enlace de descarga del APK.
 - Versión GTK: enlace "Get Dot on your phone" en el pie, hacia la versión web
   instalable.
+- Versión web: favicon.
 
 ### Corregido
 

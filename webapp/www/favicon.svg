@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Metrónomo</title>
+  <defs>
+    <linearGradient id="cuerpo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a4560"/>
+      <stop offset="1" stop-color="#242030"/>
+    </linearGradient>
+    <linearGradient id="pendulo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9a6ff"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cuerpo: trapezoide clásico del metrónomo mecánico -->
+  <path d="M 46 20 L 82 20 L 100 108 Q 100 114 94 114 L 34 114 Q 28 114 28 108 Z"
+        fill="url(#cuerpo)" stroke="#181620" stroke-width="2"/>
+
+  <!-- Base -->
+  <rect x="26" y="108" width="76" height="10" rx="4" fill="#181620"/>
+
+  <!-- Escala del péndulo -->
+  <line x1="40" y1="34" x2="46" y2="98" stroke="#0000" stroke-width="0"/>
+
+  <!-- Péndulo, inclinado como en pleno tic-tac -->
+  <g transform="rotate(18 64 104)">
+    <rect x="61" y="26" width="6" height="80" rx="3" fill="url(#pendulo)"/>
+    <circle cx="64" cy="60" r="9" fill="#e7defd"/>
+  </g>
+
+  <!-- Eje del péndulo -->
+  <circle cx="64" cy="106" r="5" fill="#e7defd"/>
+</svg>

@@ -8,6 +8,11 @@
 <meta name="description" content="Dot is a free online metronome with tap tempo and adjustable beat subdivisions (2 to 7). No ads, no tracking, no sign-up — works right in your browser.">
 <link rel="canonical" href="https://pulse.alteus.app/">
 <meta name="theme-color" content="#24212c">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- PWA: instalable desde el navegador (ver manifest.webmanifest y sw.js) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Dot">
 
 <!-- Open Graph / Twitter Card: sin og:image todavía a propósito — el único
      screenshot que existe (resources/screenshot.png) muestra la barra de
@@ -130,6 +135,17 @@
      para ocupar todo el ancho de la ventana. -->
 <footer class="pie">
   <div class="pie-izq">
+    <!-- Instalar la PWA. Oculto hasta que el navegador avisa que se puede
+         instalar (evento beforeinstallprompt, ver app.js): no aparece si ya
+         está instalada, si se abre como app, ni en navegadores que no lo
+         soportan. Equivalente del enlace "Get Dot on your phone" de GTK. -->
+    <button id="boton-instalar" class="enlace-instalar" hidden>
+      <svg class="icono-instalar" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3v11m0 0-4.5-4.5M12 14l4.5-4.5M5 17v2.5h14V17" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Install app</span>
+    </button>
     <a class="bmc" href="https://buymeacoffee.com/daniel_manzanares" target="_blank" rel="noopener">☕ Buy me a coffee</a>
   </div>
   <div class="pie-der">
