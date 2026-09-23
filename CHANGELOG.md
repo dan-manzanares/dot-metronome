@@ -68,6 +68,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
   La animación deja de correr en reposo.
 - Versión web: en pantallas angostas las marcas del slider muestran solo el
   número. El texto de "Acerca de" es el mismo que en GTK (del README).
+- Dominio de la web: `dot.alteus.app` (canonical, Open Graph, sitemap y
+  robots.txt).
 - El ícono pasó de `packaging/io.github.danmanzanares.Dot.svg` a
   `resources/icono.svg`.
 - Versión GTK: el ritmo lo lleva ahora el reloj de la tarjeta de sonido. En
