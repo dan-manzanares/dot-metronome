@@ -57,6 +57,9 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ### Cambiado
 
+- La versión web pasa a ser la única app que se distribuye. La versión GTK se
+  sacó del repositorio (su última versión es el tag `gtk-final`) y ya no se
+  mantiene a la par de la web.
 - Pie reorganizado en las dos versiones: "Install app" (web) / "Get Dot on
   your phone" (GTK) y "Buy me a coffee" en la esquina inferior izquierda; tema (◐) y "Acerca de" (ⓘ) en la
   inferior derecha, fuera de la barra de título. El menú de temas abre hacia

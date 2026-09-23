@@ -1,12 +1,14 @@
 # Dot — versión web
 
-Puerto a HTML/CSS/JS de la app de escritorio (GTK4/Adwaita) que vive en la
-raíz de este repo. Standalone: no requiere backend ni conexión — toda la
-lógica de audio y temporización corre en el navegador con Web Audio API.
+La app de Dot: HTML/CSS/JS estático. Standalone: no requiere backend ni
+conexión — toda la lógica de audio y temporización corre en el navegador con
+Web Audio API.
 
-Qué se portó de dónde:
+Nació como puerto de la app de escritorio (GTK4/Adwaita), que ya no se
+distribuye ni se mantiene a la par (su última versión está en el tag de git
+`gtk-final`). Qué se portó de dónde:
 
-| Original (GTK) | Web |
+| Original (GTK, tag `gtk-final`) | Web |
 |---|---|
 | `motor.py` + `sonido.py` | `www/js/motor.js` |
 | `interfaz.py` | `www/js/app.js` + `www/index.html` |

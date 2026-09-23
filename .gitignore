@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# App original en GTK
+/legacy
