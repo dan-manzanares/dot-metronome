@@ -29,15 +29,8 @@ Gtk.StyleContext.add_provider_for_display(
 #############
 
 # org.gnome.* está reservado para apps oficiales de GNOME; este proyecto usa
-# el esquema io.github.<usuario> para verificar la app en Flathub vía GitHub.
-# Nota: el usuario real de GitHub es "dan-manzanares" (con guion), pero el
-# guion no es válido en un segmento no-final de un App ID de Flatpak — de ahí
-# que este segmento vaya sin guion. Además el repo se llama "dot-metronome",
-# no "dot" a secas. Al enviar a Flathub, la comprobación automática de
-# propiedad (que arma la URL a partir del App ID) va a buscar
-# github.com/danmanzanares/dot y no va a encontrarlo; hay que aclarar en la
-# solicitud que el repo real es dan-manzanares/dot-metronome para que un
-# revisor lo verifique a mano.
+# el esquema io.github.<usuario> (sin el guion de "dan-manzanares", que no es
+# válido en un segmento no-final de un App ID).
 app = Adw.Application(application_id="io.github.danmanzanares.Dot")
 app.connect("activate", interfaz.al_activar)
 app.run(None)

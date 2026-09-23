@@ -9,6 +9,30 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 - Versión web: metadatos SEO en `index.html` (title, meta description, Open
   Graph, Twitter Card, JSON-LD `WebApplication`), `robots.txt` y
   `sitemap.xml`.
+- Botón ◐ en la barra de título (versiones GTK y web) que abre un menú con
+  siete temas: el oscuro original, Catppuccin Mocha y Latte, Nord y Nord
+  Light, y Gruvbox Dark y Light. La elección se recuerda entre sesiones: en
+  GTK, en `~/.config/dot/tema`; en la web, en `localStorage`. Los temas
+  claros invierten el relieve de los botones (variables `--luz` y
+  `--sombra`), que antes estaba fijo para fondo oscuro.
+- Slider de volumen (versiones GTK y web) debajo de las subdivisiones, del
+  mismo ancho: 0 a 125 %, con marcas en 25, 50, 75, 100 y 125 %. El tramo por
+  encima de 100 % amplifica y se pinta con el rojo del tema. No toca el
+  ritmo: en GTK lo aplica un elemento `volume` de GStreamer y en la web una
+  ganancia general de Web Audio. Se recuerda entre sesiones, igual que el
+  tema (`~/.config/dot/volumen` / `localStorage`).
+- Versión GTK: enlace "Get Dot on your phone" en el pie, hacia la versión web
+  instalable.
+
+### Corregido
+
+- Versión web: tocar ON dos veces mientras cargaba el sonido arrancaba dos
+  planificadores (clics dobles que OFF no detenía).
+- Versión web: al apagar seguían sonando los clics ya programados por
+  adelantado; ahora se cortan en seco, como en GTK.
+- Versión web: el campo BPM aceptaba textos como "120abc".
+- Versión web: a 360 px de ancho, los botones −5/+5 se salían de la pantalla
+  y las etiquetas del slider se superponían.
 
 ### Eliminado
 
@@ -27,8 +51,24 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ### Cambiado
 
+- Pie reorganizado en las dos versiones: "Install app" (web) / "Get Dot on
+  your phone" (GTK) y "Buy me a coffee" en la esquina inferior izquierda; tema (◐) y "Acerca de" (ⓘ) en la
+  inferior derecha, fuera de la barra de título. El menú de temas abre hacia
+  arriba.
+- Versión web alineada con el motor de GTK: los círculos se encienden cuando
+  el clic de verdad se oye (descontando la latencia de salida), el beat suena
+  mezclado con la subdivisión, cada clic corta al anterior, se recorta el
+  silencio inicial del mp3 y el círculo chico se enciende también en el beat.
+  La animación deja de correr en reposo.
+- Versión web: en pantallas angostas las marcas del slider muestran solo el
+  número. El texto de "Acerca de" es el mismo que en GTK (del README).
 - El ícono pasó de `packaging/io.github.danmanzanares.Dot.svg` a
   `resources/icono.svg`.
+- Versión GTK: el ritmo lo lleva ahora el reloj de la tarjeta de sonido. En
+  vez de un temporizador de GLib que arrancaba un `playbin` en cada clic (con
+  retrasos variables y deriva acumulada), un único flujo `appsrc` genera el
+  audio y coloca cada clic en su muestra exacta, a 48 kHz. Las animaciones se
+  sincronizan con la posición real de reproducción.
 - Renombrado el proyecto de **Pulse** a **Dot** en las versiones GTK y web:
   ventana, diálogo "Acerca de", ícono y App ID
   (`io.github.danmanzanares.Dot`). El repositorio de GitHub también se

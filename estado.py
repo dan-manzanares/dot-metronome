@@ -9,9 +9,12 @@ area_dibujo = None
 selector = None
 titulo = None
 
+# Tema visual actual ("oscuro" o "catppuccin"; ver interfaz.TEMAS)
+tema = "oscuro"
+
 # Parámetros del metrónomo
 bpm = 70
-ms_bpm = int(60000 / bpm)
+volumen = 100  # porcentaje, 0-125 (más de 100 amplifica)
 subdiv = 1
 io = False
 
@@ -19,11 +22,13 @@ io = False
 progreso_onda = 1.0
 progreso_sub = 1.0
 
-# Identificadores de temporizadores (para poder cancelarlos con GLib.source_remove)
-pulso_beat_id = None
-animar_beat_id = None
-pulso_sub_id = []  # lista: puede haber varias subdivisiones pendientes a la vez
-animar_sub_id = None
+# Instante (segundos, reloj de cuadros de GTK) en que sonó el último beat y el
+# último clic de cualquier tipo; de ahí salen progreso_onda / progreso_sub.
+inicio_onda = float("-inf")
+inicio_sub = float("-inf")
+
+# Identificador del tick callback que anima los círculos (None = no corre)
+animacion_id = None
 
 # Tap tempo: instantes (time.monotonic()) de los últimos clics en los círculos
 tap_tiempos = []

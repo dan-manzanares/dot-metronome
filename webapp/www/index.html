@@ -23,6 +23,22 @@
 <meta name="twitter:title" content="Dot - Minimal Metronome, no ads, no tracking, free forever">
 <meta name="twitter:description" content="Free online metronome with tap tempo and adjustable beat subdivisions. No ads, no tracking, free forever.">
 
+<script>
+  // Aplica el tema guardado antes de cargar el CSS, para que la página no
+  // se vea un instante con el tema oscuro y luego cambie. La lista está
+  // repetida acá a propósito: este script corre antes que app.js.
+  try {
+    var colorBarra = {
+      catppuccin: "#181825", latte: "#dce0e8", nord: "#2e3440",
+      "nord-claro": "#d8dee9", gruvbox: "#282828", "gruvbox-claro": "#ebdbb2"
+    };
+    var temaGuardado = localStorage.getItem("tema");
+    if (colorBarra[temaGuardado]) {
+      document.documentElement.dataset.tema = temaGuardado;
+      document.querySelector('meta[name="theme-color"]').content = colorBarra[temaGuardado];
+    }
+  } catch (e) {}
+</script>
 <link rel="stylesheet" href="css/estilo.css">
 
 <script type="application/ld+json">
@@ -51,7 +67,6 @@
 
 <header class="barra-titulo">
   <h1 class="titulo-app">Dot</h1>
-  <button id="boton-acerca-de" class="boton-info" title="About">ⓘ</button>
 </header>
 
 <main class="contenido">
@@ -68,13 +83,13 @@
   <input id="slider-bpm" class="slider-bpm" type="range" min="40" max="220" step="1" value="70"
          aria-label="Tempo in BPM">
   <div class="marcas-bpm" aria-hidden="true">
-    <span class="marca">40 BPM</span>
-    <span class="marca">70 BPM</span>
-    <span class="marca">100 BPM</span>
-    <span class="marca">130 BPM</span>
-    <span class="marca">160 BPM</span>
-    <span class="marca">190 BPM</span>
-    <span class="marca">220 BPM</span>
+    <span class="marca">40<span class="unidad">&nbsp;BPM</span></span>
+    <span class="marca">70<span class="unidad">&nbsp;BPM</span></span>
+    <span class="marca">100<span class="unidad">&nbsp;BPM</span></span>
+    <span class="marca">130<span class="unidad">&nbsp;BPM</span></span>
+    <span class="marca">160<span class="unidad">&nbsp;BPM</span></span>
+    <span class="marca">190<span class="unidad">&nbsp;BPM</span></span>
+    <span class="marca">220<span class="unidad">&nbsp;BPM</span></span>
   </div>
 
   <!-- Círculos animados -->
@@ -94,21 +109,58 @@
     <button class="toggle-sub" data-valor="7">7</button>
   </div>
 
-  <footer class="pie">
-    <a class="bmc" href="https://buymeacoffee.com/daniel_manzanares" target="_blank" rel="noopener">☕ Buy me a coffee</a>
-  </footer>
+  <!-- Volumen: 0-125 %. Por encima de 100 amplifica y ese tramo se pinta con
+       el rojo del tema. Mismo ancho que el selector de subdivisión. -->
+  <div class="fila-volumen">
+    <input id="slider-volumen" class="slider-volumen" type="range" min="0" max="125" step="1" value="100"
+           aria-label="Volume" title="Volume">
+    <div class="marcas-volumen" aria-hidden="true">
+      <span class="marca" style="--f: 0.2">25%</span>
+      <span class="marca" style="--f: 0.4">50%</span>
+      <span class="marca" style="--f: 0.6">75%</span>
+      <span class="marca" style="--f: 0.8">100%</span>
+      <span class="marca" style="--f: 1">125%</span>
+    </div>
+  </div>
 
 </main>
+
+<!-- Pie: enlaces en la esquina inferior izquierda, tema e "Acerca de" en la
+     inferior derecha (igual que el pie de interfaz.py). Va fuera de <main>
+     para ocupar todo el ancho de la ventana. -->
+<footer class="pie">
+  <div class="pie-izq">
+    <a class="bmc" href="https://buymeacoffee.com/daniel_manzanares" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </div>
+  <div class="pie-der">
+    <button id="boton-tema" class="boton-info boton-tema" popovertarget="menu-temas"
+            title="Change theme" aria-label="Change theme">◐</button>
+
+    <!-- Menú de temas (equivalente del Gtk.Popover de interfaz.py). El atributo
+         popover lo muestra por encima del resto sin tener que manejar clics
+         afuera ni la tecla Escape a mano. -->
+    <div id="menu-temas" class="menu-temas" popover role="menu">
+      <button class="opcion-tema" data-tema="oscuro">Dark</button>
+      <button class="opcion-tema" data-tema="catppuccin">Catppuccin Mocha</button>
+      <button class="opcion-tema" data-tema="latte">Catppuccin Latte</button>
+      <button class="opcion-tema" data-tema="nord">Nord</button>
+      <button class="opcion-tema" data-tema="nord-claro">Nord Light</button>
+      <button class="opcion-tema" data-tema="gruvbox">Gruvbox Dark</button>
+      <button class="opcion-tema" data-tema="gruvbox-claro">Gruvbox Light</button>
+    </div>
+    <button id="boton-acerca-de" class="boton-info" title="About">ⓘ</button>
+  </div>
+</footer>
 
 <!-- Diálogo "Acerca de" -->
 <dialog id="dialogo-acerca-de" class="dialogo-acerca-de">
   <h2>Dot</h2>
   <p class="version">Version 1.0</p>
+  <!-- Mismo texto que el diálogo de GTK, que lo lee de la sección
+       "What's this?" de README.md: si cambia allá, actualizarlo acá. -->
   <p>
-    Dot is an online metronome that aims to be simple, useful and free forever.
-    Set your tempo with the slider, the -5/+5 buttons or tap tempo, and split
-    each beat into subdivisions from 2 to 7. No ads, no tracking, no account,
-    no requests to upgrade to premium.
+    This is a metronome app that aims to be simple, useful and free forever.
+    It's main purpose is to provide an straightforward way to practice, no ads, no tracking, no requests to upgrade to premium.
   </p>
   <p>Developed by Daniel Manzanares, 2026.</p>
   <p class="licencia">

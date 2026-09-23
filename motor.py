@@ -1,11 +1,10 @@
-# El "motor" del metrónomo: temporizadores y lógica de beat/subdivisión.
+# El "motor" del metrónomo: controles de BPM/subdivisión, encendido y animación
+# (el ritmo en sí lo lleva sonido.py, con el reloj de la tarjeta de sonido).
 # Nota: aquí ya no se usa "global" en ningún lado — eso solo hace falta para
 # variables del PROPIO módulo. Como bpm, subdiv, etc. viven en estado.py,
 # simplemente se leen/escriben como estado.bpm, estado.subdiv, ...
 
 import time
-
-from gi.repository import GLib
 
 import estado
 import sonido
@@ -15,16 +14,30 @@ import sonido
 TAP_TIMEOUT_S = 2.0
 
 
-def animar_beat():
-    estado.progreso_onda += 0.05
-    estado.area_dibujo.queue_draw()
-    return estado.progreso_onda < 1.0  # True mientras no termine, False cuando acaba
+# Duración del desvanecido de los círculos tras cada clic (antes: 20 pasos de 15 ms).
+DURACION_ANIMACION_S = 0.3
 
 
-def animar_sub():
-    estado.progreso_sub += 0.05
-    estado.area_dibujo.queue_draw()
-    return estado.progreso_sub < 1.0
+def _al_cuadro(area, reloj_cuadros):
+    # Se ejecuta una vez por cuadro de pantalla mientras hay algo que animar.
+    # No decide CUÁNDO suena nada (eso lo hace sonido.py con la tarjeta):
+    # solo pregunta qué clics ya se oyeron y anima a partir de ese momento.
+    ahora = reloj_cuadros.get_frame_time() / 1_000_000
+    for es_beat in sonido.eventos_sonados():
+        if es_beat:
+            estado.inicio_onda = ahora
+        estado.inicio_sub = ahora  # cada clic (beat incluido) enciende el círculo chico
+
+    onda = min(1.0, (ahora - estado.inicio_onda) / DURACION_ANIMACION_S)
+    sub = min(1.0, (ahora - estado.inicio_sub) / DURACION_ANIMACION_S)
+    if (onda, sub) != (estado.progreso_onda, estado.progreso_sub):
+        estado.progreso_onda, estado.progreso_sub = onda, sub
+        area.queue_draw()
+
+    if not estado.io and onda >= 1.0 and sub >= 1.0:
+        estado.animacion_id = None
+        return False  # apagado y animaciones terminadas: deja de correr
+    return True
 
 
 def _limitar_bpm(valor):
@@ -33,7 +46,7 @@ def _limitar_bpm(valor):
 
 def aplicar_bpm(nuevo_bpm):
     # Único lugar que sincroniza bpm + slider + label numérico: lo usan
-    # los botones -5/+5, el campo editable y pulso_beat, así que slider,
+    # los botones -5/+5, el campo editable y el tap tempo, así que slider,
     # label y estado.bpm nunca quedan desalineados entre sí.
     estado.bpm = _limitar_bpm(nuevo_bpm)
     estado.selector.set_value(estado.bpm)
@@ -65,50 +78,17 @@ def bpm_desde_slider(selector):
     estado.titulo.set_text(str(estado.bpm) + " BPM")
 
 
-def pulso_beat():
-    aplicar_bpm(int(estado.selector.get_value()))
-    estado.ms_bpm = int(60000 / estado.bpm)
-
-    estado.progreso_onda = 0.0
-    estado.area_dibujo.queue_draw()
-
-    # Subdivisión 0: coincide exactamente con este beat, se llama directo (sin after)
-    estado.pulso_sub_id = []
-    pulso_sub()
-
-    # Subdivisiones intermedias de este beat
-    for i in range(1, estado.subdiv):
-        offset = int(estado.ms_bpm * i / estado.subdiv)
-        estado.pulso_sub_id.append(GLib.timeout_add(offset, pulso_sub))
-
-    sonido.reproducir_beat()
-    estado.animar_beat_id = GLib.timeout_add(15, animar_beat)
-    estado.pulso_beat_id = GLib.timeout_add(estado.ms_bpm, pulso_beat)
-    return False  # pulso_beat se reprograma a sí misma arriba, no por retorno
-
-
-def pulso_sub():
-    estado.progreso_sub = 0.0
-    estado.area_dibujo.queue_draw()
-
-    if estado.subdiv > 1:
-        sonido.reproducir_sub()
-
-    estado.animar_sub_id = GLib.timeout_add(15, animar_sub)
-    return False  # no se reprograma sola; pulso_beat() la dispara cada vez
-
-
 def onoff(clicked):
     if estado.io == False:
-        pulso_beat()  # pulso_beat gobierna su propio reloj y el de las subdivisiones
+        sonido.encender()  # desde acá el ritmo lo lleva la tarjeta de sonido
+        if estado.animacion_id is None:
+            estado.animacion_id = estado.area_dibujo.add_tick_callback(_al_cuadro)
         clicked.set_label("OFF")
         clicked.add_css_class("io-encendido")
     else:
+        sonido.apagar()
         clicked.set_label("ON")
         clicked.remove_css_class("io-encendido")
-        GLib.source_remove(estado.pulso_beat_id)
-        for id in estado.pulso_sub_id:
-            GLib.source_remove(id)
     estado.io = not estado.io
 
 
