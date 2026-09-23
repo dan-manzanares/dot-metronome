@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Dot
-Comment=Minimal metronome, no ads, no tracking, free forever
-Exec=dot
-Icon=io.github.danmanzanares.Dot
-Terminal=false
-Categories=AudioVideo;Audio;Music;
-StartupNotify=true

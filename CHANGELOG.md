@@ -6,14 +6,19 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ### Añadido
 
-- `PACKAGING.md`: procedimiento completo de build, prueba, validación y
-  publicación en Flathub, con los comandos exactos.
 - Versión web: metadatos SEO en `index.html` (title, meta description, Open
   Graph, Twitter Card, JSON-LD `WebApplication`), `robots.txt` y
   `sitemap.xml`.
 
 ### Eliminado
 
+- Empaquetado Flatpak y publicación en Flathub: manifest
+  `io.github.danmanzanares.Dot.json`, launcher `dot.sh`, desktop entry y
+  metainfo de `packaging/`, y `PACKAGING.md`. La versión GTK se ejecuta con
+  `python3 main_gtk.py`.
+- Versión Android con Capacitor: `webapp/android/`, `capacitor.config.json`,
+  `package.json`/`package-lock.json` y la parte de Android de
+  `webapp/generar-iconos.sh`. En el celular se usa la web instalada como PWA.
 - `main.py` (versión original en Tkinter) y los sonidos que solo usaba ella,
   `resources/beat_agudo.wav` y `resources/beat_grave.wav`. Dependían de
   `tkinter` y `pygame`, ausentes en el runtime de GNOME, así que nunca podían
@@ -22,30 +27,18 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ### Cambiado
 
-- Renombrado el proyecto de **Pulse** a **Dot** en las tres versiones
-  (escritorio/Flatpak, web y Android): ventana, diálogo "Acerca de", desktop
-  entry, metainfo, ícono, App ID (`io.github.danmanzanares.Dot`), launcher
-  (`dot.sh`), `capacitor.config.json` y `package.json`. Motivo: la revisión
-  de Flathub bajo `io.github.danmanzanares.Pulse` fue descartada por los
-  revisores. El repositorio de GitHub también se renombró a
-  `dan-manzanares/dot-metronome`.
-- Manifest simplificado: se quitó el bloque `cleanup` (no aplica a un proyecto
-  de puro Python: no genera `/include`, `.la` ni `.a`), el `mkdir -p`
-  redundante (`install -D` ya crea los directorios) y se unificaron las
-  órdenes de instalación que apuntaban al mismo destino.
-- El Flatpak ya no incluye `resources/screenshot.png` (solo sirve para la
-  ficha de la tienda y el README). El payload instalado bajó de 536 KB a
-  212 KB.
-- Permisos de instalación corregidos: los módulos Python y los datos van como
-  644; solo el launcher en `/app/bin/dot` necesita 755.
-- La licencia ya no se instala dos veces: `flatpak-builder` la publica sola en
-  `/app/share/licenses/`.
+- El ícono pasó de `packaging/io.github.danmanzanares.Dot.svg` a
+  `resources/icono.svg`.
+- Renombrado el proyecto de **Pulse** a **Dot** en las versiones GTK y web:
+  ventana, diálogo "Acerca de", ícono y App ID
+  (`io.github.danmanzanares.Dot`). El repositorio de GitHub también se
+  renombró a `dan-manzanares/dot-metronome`.
 
 ## [1.0.0] - 2026-09-14
 
 ### Añadido
 
-- Empaquetado como Flatpak: manifest [io.github.danmanzanares.Dot.json](io.github.danmanzanares.Dot.json)
+- Empaquetado como Flatpak: manifest `io.github.danmanzanares.Dot.json`
   (entonces `io.github.danmanzanares.Pulse.json`, ver "Renombrado" más arriba),
   launcher `dot.sh` (entonces `pulse.sh`), desktop entry, metainfo AppStream
   (con captura de pantalla) e ícono, todo bajo `packaging/`.

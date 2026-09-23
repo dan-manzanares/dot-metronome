@@ -33,7 +33,7 @@
   "url": "https://pulse.alteus.app/",
   "description": "Free online metronome with tap tempo and adjustable beat subdivisions (2 to 7). No ads, no tracking, no sign-up.",
   "applicationCategory": "MusicApplication",
-  "operatingSystem": "Any (web browser), Android",
+  "operatingSystem": "Any (web browser)",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -50,34 +50,8 @@
 <body>
 
 <header class="barra-titulo">
-  <!-- Solo para el sitio web: dentro de la app empaquetada con Capacitor,
-       el script de abajo lo oculta apenas carga la página (ver nota ahí).
-       PLACEHOLDER: todavía no hay ningún release publicado (ni .apk en
-       GitHub ni ficha de Play Store) — reemplazar este href apenas exista. -->
-  <a id="enlace-descarga-android" class="enlace-android"
-     href="https://dot.alteus.app/app.apk"
-     target="_blank" rel="noopener">
-    <svg class="icono-android" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M7 10.5v6.2c0 .5.4.9.9.9h.6v2.7a1.1 1.1 0 0 0 2.2 0v-2.7h2.6v2.7a1.1 1.1 0 0 0 2.2 0v-2.7h.6c.5 0 .9-.4.9-.9v-6.2H7Z"/>
-      <path d="M7 9.6h10a5 5 0 0 0-2.09-3.5l.86-1.49a.45.45 0 1 0-.78-.45l-.9 1.55a5.6 5.6 0 0 0-4.18 0l-.9-1.55a.45.45 0 1 0-.78.45l.86 1.49A5 5 0 0 0 7 9.6Zm3.1-2.1a.55.55 0 1 1 0-1.1.55.55 0 0 1 0 1.1Zm3.8 0a.55.55 0 1 1 0-1.1.55.55 0 0 1 0 1.1Z"/>
-      <rect x="3.6" y="10.5" width="1.8" height="5.6" rx="0.9"/>
-      <rect x="18.6" y="10.5" width="1.8" height="5.6" rx="0.9"/>
-    </svg>
-    <span>Download Android app</span>
-  </a>
   <h1 class="titulo-app">Dot</h1>
   <button id="boton-acerca-de" class="boton-info" title="About">ⓘ</button>
-  <script>
-    // Solo debe verse en el sitio web, nunca en el port empaquetado con
-    // Capacitor. Dentro de una app nativa de Capacitor, el runtime inyecta
-    // window.Capacitor antes de que el WebView empiece a parsear la página
-    // (se agrega desde el lado nativo, no desde un <script> de este HTML),
-    // así que ya está disponible en este punto. En un navegador normal esa
-    // variable no existe nunca, así que el enlace queda visible.
-    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
-      document.getElementById("enlace-descarga-android").hidden = true;
-    }
-  </script>
 </header>
 
 <main class="contenido">
